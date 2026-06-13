@@ -1,0 +1,172 @@
+@import "tailwindcss";
+
+@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700;900&family=Rajdhani:wght@400;500;600;700&family=JetBrains+Mono:wght@300;400;500&display=swap');
+
+:root {
+  --bg: #000000;
+  --cyan: #00f3ff;
+  --cyan-dim: rgba(0, 243, 255, 0.25);
+  --purple: #b026ff;
+  --purple-dim: rgba(176, 38, 255, 0.25);
+  --panel: rgba(8, 16, 28, 0.45);
+  --panel-border: rgba(0, 243, 255, 0.18);
+  --text-main: #d8f7ff;
+  --text-dim: #6f93a8;
+  --font-display: 'Orbitron', sans-serif;
+  --font-body: 'Rajdhani', sans-serif;
+}
+
+@theme {
+  --font-sans: 'Rajdhani', sans-serif;
+  --font-display: 'Orbitron', sans-serif;
+  --font-mono: 'JetBrains Mono', monospace;
+}
+
+/* Global scrollbars and core console aesthetics */
+html, body {
+  width: 100%;
+  height: 100%;
+  background: var(--bg);
+  color: var(--text-main);
+  font-family: var(--font-body);
+  overflow: hidden;
+}
+
+/* Faint perspective grid floor glow */
+.bg-grid {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  background-image:
+    linear-gradient(rgba(0, 243, 255, 0.04) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0, 243, 255, 0.04) 1px, transparent 1px);
+  background-size: 48px 48px;
+  -webkit-mask-image: radial-gradient(ellipse at center, rgba(0,0,0,0.9) 0%, transparent 75%);
+  mask-image: radial-gradient(ellipse at center, rgba(0,0,0,0.9) 0%, transparent 75%);
+  animation: gridDrift 30s linear infinite;
+  pointer-events: none;
+}
+
+@keyframes gridDrift {
+  from { background-position: 0 0, 0 0; }
+  to { background-position: 48px 48px, 48px 48px; }
+}
+
+/* Subtle horizontal scanline sweep */
+.bg-scanline {
+  position: fixed;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  background: linear-gradient(180deg, transparent 0%, rgba(0, 243, 255, 0.03) 50%, transparent 100%);
+  height: 200%;
+  animation: scanMove 12s linear infinite;
+}
+
+@keyframes scanMove {
+  from { transform: translateY(-50%); }
+  to { transform: translateY(0%); }
+}
+
+/* Vignette to keep outer edges dim */
+.bg-vignette {
+  position: fixed;
+  inset: 0;
+  z-index: 2;
+  pointer-events: none;
+  background: radial-gradient(circle at 50% 50%, transparent 40%, rgba(0,0,0,0.85) 100%);
+}
+
+/* Scrollbar Customization for transcripts log */
+.custom-scrollbar::-webkit-scrollbar {
+  width: 4px;
+}
+.custom-scrollbar::-webkit-scrollbar-thumb {
+  background-color: var(--cyan-dim);
+  border-radius: 4px;
+}
+.custom-scrollbar::-webkit-scrollbar-track {
+  background: rgba(0, 0, 0, 0.2);
+}
+
+/* Core Animations */
+@keyframes spinClockwise {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+@keyframes spinCounterClockwise {
+  from { transform: rotate(360deg); }
+  to { transform: rotate(0deg); }
+}
+
+@keyframes corePulseGlow {
+  0%, 100% {
+    opacity: 0.6;
+    transform: scale(1);
+    filter: blur(14px) drop-shadow(0 0 20px rgba(0,243,255,0.4));
+  }
+  50% {
+    opacity: 0.95;
+    transform: scale(1.08);
+    filter: blur(16px) drop-shadow(0 0 35px rgba(176,38,255,0.6));
+  }
+}
+
+@keyframes corePulseScale {
+  0%, 100% {
+    transform: scale(1);
+    box-shadow: 0 0 30px var(--cyan-dim), inset 0 0 20px rgba(0, 243, 255, 0.15);
+  }
+  50% {
+    transform: scale(1.04);
+    box-shadow: 0 0 45px var(--cyan-dim), inset 0 0 35px rgba(0, 243, 255, 0.25);
+  }
+}
+
+@keyframes blink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.3; }
+}
+
+/* Audio waveform animations */
+@keyframes waveListen {
+  0%, 100% { height: 15%; }
+  50% { height: 100%; }
+}
+
+@keyframes waveSpeak {
+  0%, 100% { height: 25%; }
+  50% { height: 75%; }
+}
+
+@keyframes micRipple {
+  0% { transform: scale(1); opacity: 0.8; }
+  100% { transform: scale(1.8); opacity: 0; }
+}
+
+@keyframes fadeInY {
+  from { opacity: 0; transform: translateY(6px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* Custom class triggers */
+.animate-spin-slow {
+  animation: spinClockwise 16s linear infinite;
+}
+
+.animate-spin-reverse-medium {
+  animation: spinCounterClockwise 9s linear infinite;
+}
+
+.animate-spin-slowest {
+  animation: spinClockwise 25s linear infinite;
+}
+
+.glow-cyan {
+  text-shadow: 0 0 8px var(--cyan), 0 0 16px var(--cyan-dim);
+}
+
+.glow-purple {
+  text-shadow: 0 0 8px var(--purple), 0 0 16px var(--purple-dim);
+}

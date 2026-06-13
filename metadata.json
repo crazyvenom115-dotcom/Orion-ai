@@ -1,0 +1,6 @@
+{
+  "name": "Orion AI",
+  "description": "A powerful, futuristic real-time AI assistant with advanced conversational capabilities, voice interaction, and live metrics feed.",
+  "requestFramePermissions": ["microphone", "geolocation"],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
